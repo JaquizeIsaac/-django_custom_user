@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<section class="flex items-center justify-center min-h-screen bg-gray-50">
+  <div class="w-full max-w-md px-6 py-8 mx-auto bg-white rounded-lg shadow-md">
+    <h2 class="mb-8 text-3xl font-bold text-center text-gray-900">Sign Up</h2>
+    <form method="post" class="space-y-6">
+      {% csrf_token %}
+      {% for field in form %}
+        <div>
+          <label for="{{ field.id_for_label }}" class="text-sm font-medium text-gray-700">{{ field.label }}</label>
+          {% render_field field class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %}
+          {% if field.help_text %}
+            <p class="mt-2 text-xs text-gray-500">{{ field.help_text }}</p>
+          {% endif %}
+          {% if field.errors %}
+            <p class="text-xs text-red-500">{{ field.errors }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+      <button type="submit" class="w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Log In</button>
+    </form>
+  </div>
+</section>
+{% endblock %}
